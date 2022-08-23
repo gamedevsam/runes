@@ -162,23 +162,14 @@ function betweenInclusive(value: number, lower: number, upper: number)
 	return value >= lower && value <= upper
 }
 
-export function substring(string: string, start?: number, width?: number, runesCache?: Record<string, string[]>)
+export function substring(string: string, start?: number, width?: number)
 {
 	if (start === undefined)
 	{
 		return string
 	}
 
-	let chars;
-	if (runesCache) {
-		chars = runesCache[string];
-		if (!chars) {
-			chars = runes(string);
-			runesCache[string] = chars;
-		}
-	} else {
-		chars = runes(string)
-	}
+	const chars = runes(string);
 
 	if (start >= chars.length)
 	{

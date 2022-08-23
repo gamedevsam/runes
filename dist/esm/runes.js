@@ -119,21 +119,11 @@ function codePointFromSurrogatePair(pair) {
 function betweenInclusive(value, lower, upper) {
     return value >= lower && value <= upper;
 }
-export function substring(string, start, width, runesCache) {
+export function substring(string, start, width) {
     if (start === undefined) {
         return string;
     }
-    let chars;
-    if (runesCache) {
-        chars = runesCache[string];
-        if (!chars) {
-            chars = runes(string);
-            runesCache[string] = chars;
-        }
-    }
-    else {
-        chars = runes(string);
-    }
+    const chars = runes(string);
     if (start >= chars.length) {
         return '';
     }
