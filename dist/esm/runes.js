@@ -119,11 +119,21 @@ function codePointFromSurrogatePair(pair) {
 function betweenInclusive(value, lower, upper) {
     return value >= lower && value <= upper;
 }
-function substring(string, start, width) {
+export function substring(string, start, width, runesCache) {
     if (start === undefined) {
         return string;
     }
-    const chars = runes(string);
+    let chars;
+    if (runesCache) {
+        chars = runesCache[string];
+        if (!chars) {
+            chars = runes(string);
+            runesCache[string] = chars;
+        }
+    }
+    else {
+        chars = runes(string);
+    }
     if (start >= chars.length) {
         return '';
     }
@@ -135,7 +145,5 @@ function substring(string, start, width) {
     }
     return chars.slice(start, endIndex).join('');
 }
-runes.substr = substring;
-runes.substring = substring;
-export default runes;
+export const substr = substring;
 //# sourceMappingURL=runes.js.map

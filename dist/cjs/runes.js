@@ -1,6 +1,6 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.runes = void 0;
+exports.substr = exports.substring = exports.runes = void 0;
 const HIGH_SURROGATE_START = 0xd800;
 const HIGH_SURROGATE_END = 0xdbff;
 const LOW_SURROGATE_START = 0xdc00;
@@ -122,11 +122,21 @@ function codePointFromSurrogatePair(pair) {
 function betweenInclusive(value, lower, upper) {
     return value >= lower && value <= upper;
 }
-function substring(string, start, width) {
+function substring(string, start, width, runesCache) {
     if (start === undefined) {
         return string;
     }
-    const chars = runes(string);
+    let chars;
+    if (runesCache) {
+        chars = runesCache[string];
+        if (!chars) {
+            chars = runes(string);
+            runesCache[string] = chars;
+        }
+    }
+    else {
+        chars = runes(string);
+    }
     if (start >= chars.length) {
         return '';
     }
@@ -138,7 +148,6 @@ function substring(string, start, width) {
     }
     return chars.slice(start, endIndex).join('');
 }
-runes.substr = substring;
-runes.substring = substring;
-exports.default = runes;
+exports.substring = substring;
+exports.substr = substring;
 //# sourceMappingURL=runes.js.map
