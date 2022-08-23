@@ -1,9 +1,8 @@
 'use strict'
 
-import runes, { substring } from '../runes';
-import { inspect } from 'util';
+import runes from '../runes';
 
-test(inspect('✂️  Runes should handle emoji in middle'), () =>
+test('✂️  Runes should handle emoji in middle', () =>
 {
 	let string = 'abc😤def';
 	let result = runes(string);
@@ -13,7 +12,7 @@ test(inspect('✂️  Runes should handle emoji in middle'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle leading emoji'), () =>
+test('✂️  Runes should handle leading emoji', () =>
 {
 	let string = '🍕abd';
 	let result = runes(string);
@@ -23,7 +22,7 @@ test(inspect('✂️  Runes should handle leading emoji'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle emoji on end'), () =>
+test('✂️  Runes should handle emoji on end', () =>
 {
 	let string = '123🍥';
 	let result = runes(string);
@@ -33,7 +32,7 @@ test(inspect('✂️  Runes should handle emoji on end'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle emoji'), () =>
+test('✂️  Runes should handle emoji', () =>
 {
 	let string = '🍕⚽⛵✨⏳☕⏰🇯🇲😍👍💅😋👭👯✊👸🏽❤️';
 	let result = runes(string);
@@ -46,7 +45,7 @@ test(inspect('✂️  Runes should handle emoji'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle checkmark'), () =>
+test('✂️  Runes should handle checkmark', () =>
 {
 	let string = '123🍕✓';
 	let result = runes(string);
@@ -56,7 +55,7 @@ test(inspect('✂️  Runes should handle checkmark'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle ZERO WIDTH JOINER'), () =>
+test('✂️  Runes should handle ZERO WIDTH JOINER', () =>
 {
 	let string = '👨‍👩‍👧';
 	let result = runes(string);
@@ -66,7 +65,7 @@ test(inspect('✂️  Runes should handle ZERO WIDTH JOINER'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle ZERO WIDTH JOINER 2'), () =>
+test('✂️  Runes should handle ZERO WIDTH JOINER 2', () =>
 {
 	let string = '👨‍👨‍👧‍👧';
 	let result = runes(string);
@@ -76,7 +75,7 @@ test(inspect('✂️  Runes should handle ZERO WIDTH JOINER 2'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should reverse'), () =>
+test('✂️  Runes should reverse', () =>
 {
 	const reversed = runes('123🍕✓').reverse().join('')
 	const contReversed = runes(reversed).reverse().join('')
@@ -87,7 +86,7 @@ test(inspect('✂️  Runes should reverse'), () =>
 	expect(contReversed).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle single char'), () =>
+test('✂️  Runes should handle single char', () =>
 {
 	let string = 'a';
 	let result = runes(string);
@@ -97,7 +96,7 @@ test(inspect('✂️  Runes should handle single char'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle regular string'), () =>
+test('✂️  Runes should handle regular string', () =>
 {
 	let string = 'Hello';
 	let result = runes(string);
@@ -107,7 +106,7 @@ test(inspect('✂️  Runes should handle regular string'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle chinese'), () =>
+test('✂️  Runes should handle chinese', () =>
 {
 	const string = '𨭎", "𠬠", and "𩷶"'
 	const result = runes(string)
@@ -123,7 +122,7 @@ test(inspect('✂️  Runes should handle chinese'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle chinese 2'), () =>
+test('✂️  Runes should handle chinese 2', () =>
 {
 	const string = '𠬠𡬶𫗭𣛙𢎐'
 	const result = runes(string)
@@ -134,7 +133,7 @@ test(inspect('✂️  Runes should handle chinese 2'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle math script'), () =>
+test('✂️  Runes should handle math script', () =>
 {
 	let string = '𝒞𝒯𝒮𝒟';
 	let result = runes(string);
@@ -144,7 +143,7 @@ test(inspect('✂️  Runes should handle math script'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle fraktur'), () =>
+test('✂️  Runes should handle fraktur', () =>
 {
 	let string = '𝔅𝔎';
 	let result = runes(string);
@@ -154,7 +153,7 @@ test(inspect('✂️  Runes should handle fraktur'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle acrophonic'), () =>
+test('✂️  Runes should handle acrophonic', () =>
 {
 	const string = '𐅧, 𐅨, and 𐅩'
 	const result = runes(string)
@@ -169,7 +168,7 @@ test(inspect('✂️  Runes should handle acrophonic'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle arabic'), () =>
+test('✂️  Runes should handle arabic', () =>
 {
 	let string = 'ځڂڃڄڅچڇڈ';
 	let result = runes(string);
@@ -179,7 +178,7 @@ test(inspect('✂️  Runes should handle arabic'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle skin tone indicators'), () =>
+test('✂️  Runes should handle skin tone indicators', () =>
 {
 	let string = '🎅🏻🎅🏼🎅🏽🎅🏾🎅🏿';
 	let result = runes(string);
@@ -189,7 +188,7 @@ test(inspect('✂️  Runes should handle skin tone indicators'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle country flags/regional indicator characters'), () =>
+test('✂️  Runes should handle country flags/regional indicator characters', () =>
 {
 	let string = '🇦🇸';
 	let result = runes(string);
@@ -199,7 +198,7 @@ test(inspect('✂️  Runes should handle country flags/regional indicator chara
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle 3️⃣'), () =>
+test('✂️  Runes should handle 3️⃣', () =>
 {
 	let string = '3️⃣';
 	let result = runes(string);
@@ -209,7 +208,7 @@ test(inspect('✂️  Runes should handle 3️⃣'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle 🏳️‍🌈'), () =>
+test('✂️  Runes should handle 🏳️‍🌈', () =>
 {
 	let string = '🏳️‍🌈';
 	let result = runes(string);
@@ -219,7 +218,7 @@ test(inspect('✂️  Runes should handle 🏳️‍🌈'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle extended grapheme clusters'), () =>
+test('✂️  Runes should handle extended grapheme clusters', () =>
 {
 	let string = 'g̈';
 	let result = runes(string);
@@ -238,26 +237,26 @@ test(inspect('✂️  Runes should handle extended grapheme clusters'), () =>
 	expect(result.length).toMatchSnapshot();
 })
 
-test(inspect('✂️  Runes should handle empty string'), () =>
+test('✂️  Runes should handle empty string', () =>
 {
 	expect(runes('')).toEqual([])
 })
 
-test(inspect('✂️  Runes should throw for null and undefined'), () =>
+test('✂️  Runes should throw for null and undefined', () =>
 {
 	// @ts-ignore
 	expect(() => runes()).toThrow()
 })
 
-test(inspect('✂️  substring'), () =>
+test('✂️  substring', () =>
 {
-	expect(substring('abc')).toEqual('abc')
-	expect(substring('abc', 1)).toEqual('bc')
-	expect(substring('abc', 0, 0)).toEqual('')
-	expect(substring('abc', 6, 100)).toEqual('')
-	expect(substring('👨‍👨‍👧‍👧')).toEqual('👨‍👨‍👧‍👧')
-	expect(substring('a👨‍👨‍👧‍👧', 1)).toEqual('👨‍👨‍👧‍👧')
-	expect(substring('abc👨‍👨‍👧‍👧abc', 3)).toEqual('👨‍👨‍👧‍👧abc')
-	expect(substring('👨‍👨‍👧‍👧abc', 1)).toEqual('abc')
-	expect(substring('👨‍👨‍👧‍👧abcd', 2)).toEqual('bcd')
+	expect(runes.substring('abc')).toEqual('abc')
+	expect(runes.substring('abc', 1)).toEqual('bc')
+	expect(runes.substring('abc', 0, 0)).toEqual('')
+	expect(runes.substring('abc', 6, 100)).toEqual('')
+	expect(runes.substring('👨‍👨‍👧‍👧')).toEqual('👨‍👨‍👧‍👧')
+	expect(runes.substring('a👨‍👨‍👧‍👧', 1)).toEqual('👨‍👨‍👧‍👧')
+	expect(runes.substring('abc👨‍👨‍👧‍👧abc', 3)).toEqual('👨‍👨‍👧‍👧abc')
+	expect(runes.substring('👨‍👨‍👧‍👧abc', 1)).toEqual('abc')
+	expect(runes.substring('👨‍👨‍👧‍👧abcd', 2)).toEqual('bcd')
 })

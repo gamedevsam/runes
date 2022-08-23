@@ -1,19 +1,19 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.substr = exports.substring = exports.betweenInclusive = exports.codePointFromSurrogatePair = exports.isZeroWidthJoiner = exports.isGraphem = exports.isDiacriticalMark = exports.isVariationSelector = exports.isFitzpatrickModifier = exports.isRegionalIndicator = exports.isFirstOfSurrogatePair = exports.nextUnits = exports.runes = exports.GRAPHEMS = exports.ZWJ = exports.DIACRITICAL_MARKS_END = exports.DIACRITICAL_MARKS_START = exports.VARIATION_MODIFIER_END = exports.VARIATION_MODIFIER_START = exports.FITZPATRICK_MODIFIER_END = exports.FITZPATRICK_MODIFIER_START = exports.REGIONAL_INDICATOR_END = exports.REGIONAL_INDICATOR_START = exports.LOW_SURROGATE_START = exports.HIGH_SURROGATE_END = exports.HIGH_SURROGATE_START = void 0;
-exports.HIGH_SURROGATE_START = 0xd800;
-exports.HIGH_SURROGATE_END = 0xdbff;
-exports.LOW_SURROGATE_START = 0xdc00;
-exports.REGIONAL_INDICATOR_START = 0x1f1e6;
-exports.REGIONAL_INDICATOR_END = 0x1f1ff;
-exports.FITZPATRICK_MODIFIER_START = 0x1f3fb;
-exports.FITZPATRICK_MODIFIER_END = 0x1f3ff;
-exports.VARIATION_MODIFIER_START = 0xfe00;
-exports.VARIATION_MODIFIER_END = 0xfe0f;
-exports.DIACRITICAL_MARKS_START = 0x20d0;
-exports.DIACRITICAL_MARKS_END = 0x20ff;
-exports.ZWJ = 0x200d;
-exports.GRAPHEMS = [
+exports.runes = void 0;
+const HIGH_SURROGATE_START = 0xd800;
+const HIGH_SURROGATE_END = 0xdbff;
+const LOW_SURROGATE_START = 0xdc00;
+const REGIONAL_INDICATOR_START = 0x1f1e6;
+const REGIONAL_INDICATOR_END = 0x1f1ff;
+const FITZPATRICK_MODIFIER_START = 0x1f3fb;
+const FITZPATRICK_MODIFIER_END = 0x1f3ff;
+const VARIATION_MODIFIER_START = 0xfe00;
+const VARIATION_MODIFIER_END = 0xfe0f;
+const DIACRITICAL_MARKS_START = 0x20d0;
+const DIACRITICAL_MARKS_END = 0x20ff;
+const ZWJ = 0x200d;
+const GRAPHEMS = [
     0x0308,
     0x0937,
     0x0937,
@@ -93,50 +93,40 @@ function nextUnits(i, string) {
     }
     return 2;
 }
-exports.nextUnits = nextUnits;
 function isFirstOfSurrogatePair(string) {
-    return string && betweenInclusive(string[0].charCodeAt(0), exports.HIGH_SURROGATE_START, exports.HIGH_SURROGATE_END);
+    return string && betweenInclusive(string[0].charCodeAt(0), HIGH_SURROGATE_START, HIGH_SURROGATE_END);
 }
-exports.isFirstOfSurrogatePair = isFirstOfSurrogatePair;
 function isRegionalIndicator(string) {
-    return betweenInclusive(codePointFromSurrogatePair(string), exports.REGIONAL_INDICATOR_START, exports.REGIONAL_INDICATOR_END);
+    return betweenInclusive(codePointFromSurrogatePair(string), REGIONAL_INDICATOR_START, REGIONAL_INDICATOR_END);
 }
-exports.isRegionalIndicator = isRegionalIndicator;
 function isFitzpatrickModifier(string) {
-    return betweenInclusive(codePointFromSurrogatePair(string), exports.FITZPATRICK_MODIFIER_START, exports.FITZPATRICK_MODIFIER_END);
+    return betweenInclusive(codePointFromSurrogatePair(string), FITZPATRICK_MODIFIER_START, FITZPATRICK_MODIFIER_END);
 }
-exports.isFitzpatrickModifier = isFitzpatrickModifier;
 function isVariationSelector(string) {
-    return typeof string === 'string' && betweenInclusive(string.charCodeAt(0), exports.VARIATION_MODIFIER_START, exports.VARIATION_MODIFIER_END);
+    return typeof string === 'string' && betweenInclusive(string.charCodeAt(0), VARIATION_MODIFIER_START, VARIATION_MODIFIER_END);
 }
-exports.isVariationSelector = isVariationSelector;
 function isDiacriticalMark(string) {
-    return typeof string === 'string' && betweenInclusive(string.charCodeAt(0), exports.DIACRITICAL_MARKS_START, exports.DIACRITICAL_MARKS_END);
+    return typeof string === 'string' && betweenInclusive(string.charCodeAt(0), DIACRITICAL_MARKS_START, DIACRITICAL_MARKS_END);
 }
-exports.isDiacriticalMark = isDiacriticalMark;
 function isGraphem(string) {
-    return typeof string === 'string' && exports.GRAPHEMS.indexOf(string.charCodeAt(0)) !== -1;
+    return typeof string === 'string' && GRAPHEMS.indexOf(string.charCodeAt(0)) !== -1;
 }
-exports.isGraphem = isGraphem;
 function isZeroWidthJoiner(string) {
-    return typeof string === 'string' && string.charCodeAt(0) === exports.ZWJ;
+    return typeof string === 'string' && string.charCodeAt(0) === ZWJ;
 }
-exports.isZeroWidthJoiner = isZeroWidthJoiner;
 function codePointFromSurrogatePair(pair) {
-    const highOffset = pair.charCodeAt(0) - exports.HIGH_SURROGATE_START;
-    const lowOffset = pair.charCodeAt(1) - exports.LOW_SURROGATE_START;
+    const highOffset = pair.charCodeAt(0) - HIGH_SURROGATE_START;
+    const lowOffset = pair.charCodeAt(1) - LOW_SURROGATE_START;
     return (highOffset << 10) + lowOffset + 0x10000;
 }
-exports.codePointFromSurrogatePair = codePointFromSurrogatePair;
 function betweenInclusive(value, lower, upper) {
     return value >= lower && value <= upper;
 }
-exports.betweenInclusive = betweenInclusive;
 function substring(string, start, width) {
-    const chars = runes(string);
     if (start === undefined) {
         return string;
     }
+    const chars = runes(string);
     if (start >= chars.length) {
         return '';
     }
@@ -148,12 +138,7 @@ function substring(string, start, width) {
     }
     return chars.slice(start, endIndex).join('');
 }
-exports.substring = substring;
-exports.substr = substring;
 runes.substr = substring;
 runes.substring = substring;
-runes.default = runes;
-runes.runes = runes;
-Object.defineProperty(runes, "__esModule", { value: true });
 exports.default = runes;
 //# sourceMappingURL=runes.js.map

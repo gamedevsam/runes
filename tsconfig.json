@@ -1,0 +1,26 @@
+{
+    "ts-node": {
+        "files": true
+    },
+    "compilerOptions": {
+        "lib": ["ES2020"],
+        "target": "ES2020",
+        "moduleResolution": "Node",
+        "outDir": "dist",
+        "strict": true,
+        "sourceMap": true,
+        "declaration": true,
+        "incremental": true,
+        "importHelpers": true,
+        "removeComments": false,
+        "resolveJsonModule": true,
+        "skipDefaultLibCheck": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "strictPropertyInitialization": false,
+        "types": ["jest", "node"]
+    },
+    "include": ["src", "packages", "infrastructure"],
+    "exclude": ["**/node_modules", "**/test", "**/dist", "**/app", "**/.*/"]
+}

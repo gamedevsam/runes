@@ -1,6 +1,6 @@
 {
   "name": "runes2",
-  "version": "0.4.16",
+  "version": "0.4.17",
   "description": "Unicode-aware JS string splitting, typescript version",
   "keywords": [
     "char",
@@ -20,13 +20,25 @@
     "url": "git+https://github.com/bluelovers/runes.git"
   },
   "license": "MIT",
-  "author": "Vitaly Domnikov <dotcypress@gmail.com>",
-  "main": "index.js",
+  "authors": [
+    "Vitaly Domnikov <dotcypress@gmail.com>",
+    "Samuel Batista <sambatista1@gmail.com>"
+  ],
+  "main": "dist/cjs/runes.js",
+  "exports": {
+    ".": {
+        "import": "./dist/esm/runes.js",
+        "require": "./dist/cjs/runes.js"
+    }
+  },
   "directories": {
     "test": "test"
   },
   "scripts": {
     "test": "jest",
+    "build": "npm run tsc",
+    "clean": "npx jest --clearCache && npx rimraf dist app logs target slug.tgz .eslintcache src/**/__generated__/*.{json,js,ts,d.ts} *.log *.tsbuildinfo",
+    "tsc": "npx concurrently -n \"cjs,esm\" \"npx tsc --module CommonJs --outDir dist/cjs\" \"npx tsc --module ES2020 --outDir dist/esm\"",
     "npm:publish": "npm publish",
     "npm:publish:lerna": "npx lerna publish --yes --cd-version patch",
     "prepublish:lockfile": "npx sync-lockfile .",
@@ -40,5 +52,13 @@
   "gitHead": "4fd01b2514996a4430f3501d9b1705d2bce8cc78",
   "dependencies": {
     "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.7",
+    "@types/node": "^18.7.11",
+    "concurrently": "^7.3.0",
+    "jest": "^28.1.3",
+    "ts-jest": "^28.0.8",
+    "typescript": "^4.7.4"
   }
 }

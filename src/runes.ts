@@ -1,25 +1,25 @@
 'use strict'
 
-export const HIGH_SURROGATE_START = 0xd800
-export const HIGH_SURROGATE_END = 0xdbff
+const HIGH_SURROGATE_START = 0xd800
+const HIGH_SURROGATE_END = 0xdbff
 
-export const LOW_SURROGATE_START = 0xdc00
+const LOW_SURROGATE_START = 0xdc00
 
-export const REGIONAL_INDICATOR_START = 0x1f1e6
-export const REGIONAL_INDICATOR_END = 0x1f1ff
+const REGIONAL_INDICATOR_START = 0x1f1e6
+const REGIONAL_INDICATOR_END = 0x1f1ff
 
-export const FITZPATRICK_MODIFIER_START = 0x1f3fb
-export const FITZPATRICK_MODIFIER_END = 0x1f3ff
+const FITZPATRICK_MODIFIER_START = 0x1f3fb
+const FITZPATRICK_MODIFIER_END = 0x1f3ff
 
-export const VARIATION_MODIFIER_START = 0xfe00
-export const VARIATION_MODIFIER_END = 0xfe0f
+const VARIATION_MODIFIER_START = 0xfe00
+const VARIATION_MODIFIER_END = 0xfe0f
 
-export const DIACRITICAL_MARKS_START = 0x20d0
-export const DIACRITICAL_MARKS_END = 0x20ff
+const DIACRITICAL_MARKS_START = 0x20d0
+const DIACRITICAL_MARKS_END = 0x20ff
 
-export const ZWJ = 0x200d
+const ZWJ = 0x200d
 
-export const GRAPHEMS = [
+const GRAPHEMS = [
 	0x0308, // ( ◌̈ ) COMBINING DIAERESIS
 	0x0937, // ( ष ) DEVANAGARI LETTER SSA
 	0x0937, // ( ष ) DEVANAGARI LETTER SSA
@@ -79,7 +79,7 @@ export function runes(string: string): string[]
 // Emoji with skin-tone modifiers: 4 code units (2 code points)
 // Country flags: 4 code units (2 code points)
 // Variations: 2 code units
-export function nextUnits(i: number, string: string): 1 | 2 | 4
+function nextUnits(i: number, string: string): 1 | 2 | 4
 {
 	const current = string[i]
 	// If we don't have a value that is part of a surrogate pair, or we're at
@@ -115,67 +115,68 @@ export function nextUnits(i: number, string: string): 1 | 2 | 4
 	return 2
 }
 
-export function isFirstOfSurrogatePair(string: string)
+function isFirstOfSurrogatePair(string: string)
 {
 	return string && betweenInclusive(string[0].charCodeAt(0), HIGH_SURROGATE_START, HIGH_SURROGATE_END)
 }
 
-export function isRegionalIndicator(string: string)
+function isRegionalIndicator(string: string)
 {
 	return betweenInclusive(codePointFromSurrogatePair(string), REGIONAL_INDICATOR_START, REGIONAL_INDICATOR_END)
 }
 
-export function isFitzpatrickModifier(string: string)
+function isFitzpatrickModifier(string: string)
 {
 	return betweenInclusive(codePointFromSurrogatePair(string), FITZPATRICK_MODIFIER_START, FITZPATRICK_MODIFIER_END)
 }
 
-export function isVariationSelector(string: string)
+function isVariationSelector(string: string)
 {
 	return typeof string === 'string' && betweenInclusive(string.charCodeAt(0), VARIATION_MODIFIER_START, VARIATION_MODIFIER_END)
 }
 
-export function isDiacriticalMark(string: string)
+function isDiacriticalMark(string: string)
 {
 	return typeof string === 'string' && betweenInclusive(string.charCodeAt(0), DIACRITICAL_MARKS_START, DIACRITICAL_MARKS_END)
 }
 
-export function isGraphem(string: string)
+function isGraphem(string: string)
 {
 	return typeof string === 'string' && GRAPHEMS.indexOf(string.charCodeAt(0)) !== -1
 }
 
-export function isZeroWidthJoiner(string: string)
+function isZeroWidthJoiner(string: string)
 {
 	return typeof string === 'string' && string.charCodeAt(0) === ZWJ
 }
 
-export function codePointFromSurrogatePair(pair: string)
+function codePointFromSurrogatePair(pair: string)
 {
 	const highOffset = pair.charCodeAt(0) - HIGH_SURROGATE_START
 	const lowOffset = pair.charCodeAt(1) - LOW_SURROGATE_START
 	return (highOffset << 10) + lowOffset + 0x10000
 }
 
-export function betweenInclusive(value: number, lower: number, upper: number)
+function betweenInclusive(value: number, lower: number, upper: number)
 {
 	return value >= lower && value <= upper
 }
 
-export function substring(string: string, start?: number, width?: number)
+function substring(string: string, start?: number, width?: number)
 {
-	const chars = runes(string)
 	if (start === undefined)
 	{
 		return string
 	}
+
+	const chars = runes(string)
 	if (start >= chars.length)
 	{
 		return ''
 	}
 	const rest = chars.length - start
 	const stringWidth = width === undefined ? rest : width
-	let endIndex = start + stringWidth
+	let endIndex: number | undefined = start + stringWidth
 	if (endIndex > (start + rest))
 	{
 		endIndex = undefined
@@ -183,15 +184,8 @@ export function substring(string: string, start?: number, width?: number)
 	return chars.slice(start, endIndex).join('')
 }
 
-export { substring as substr }
-
 runes.substr = substring;
 runes.substring = substring;
-
-runes.default = runes;
-runes.runes = runes;
-
-Object.defineProperty(runes, "__esModule", { value: true });
 
 export default runes
 

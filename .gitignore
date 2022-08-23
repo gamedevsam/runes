@@ -41,7 +41,6 @@ bin/**/*.d.ts
 yarn-error.log
 *.log
 .git
-yarn.lock
 .env.local
 .env.*.local
 npm-debug.log*
